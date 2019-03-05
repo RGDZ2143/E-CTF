@@ -1,0 +1,56 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block main %}
+    <!--登录框-->
+    <div class="am-container ">
+        <div class="am-g">
+            <div class="am-u-sm-6 am-u-lg-centered">
+                <form action="" class="am-form" id="form-with-tooltip" method="POST">
+                    <fieldset>
+                        <legend class="am-text-center am-text-secondary">登录</legend>
+                        <div class="am-form-group">
+                            <label for="username" class="am-text-secondary"><span class="am-text-danger">(*必填)&nbsp;&nbsp;</span>你的名字：</label>
+                            <input type="text" id="login-username" name="username" placeholder="不要告诉我,你是个无名宝"
+                                required data-foolish-msg="这个要看脸!!!"/>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label for="login-pwd" class="am-text-secondary"><span class="am-text-danger">(*必填)&nbsp;&nbsp;</span>密码：</label>
+                            <input type="password" id="login-userpass" name="userpass" placeholder="我不介意知道你小秘密"
+                                required data-foolish-msg="你是想干啥子哦" />
+                        </div>
+                        <a class="am-btn am-btn-default am-btn-sm am-fl" data-am-modal="{target: '#forget-alert'}" >忘记密码了 ^_^ ?</a>
+                        <input type="submit" name="" value="立即登录 *^ο^* ! "class="am-btn am-btn-success am-btn-sm am-fr">
+
+                        <!--模态窗口-->
+                        <div class="am-modal am-modal-alert" tabindex="-1" id="forget-alert">
+                            <div class="am-modal-dialog">
+                              <div class="am-modal-hd">来自管理员的问候</div>
+                              <div class="am-modal-bd am-text-warning">
+                                FUCK, 你确定你是真忘记了吗？<br/>
+                                在好好想想
+                              </div>
+                              <div class="am-modal-footer">
+                                    <span class="am-modal-btn" >再想想</span>
+                                    <span class="am-modal-btn" >忘记了</span>
+                                <!-- <a href="#" class="am-modal-btn am-fl am-text-center am-btn-danger" style="color:whitesmoke">还是忘记了</a>
+                                <span class="am-modal-btn am-fr am-text-center am-btn-danger" style="color:whitesmoke">&nbsp;&nbsp;再想想&nbsp;&nbsp;</span> -->
+                              </div>
+                            </div>
+                          </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %}
+
+{% block ac_nav_1 %}class="am-active"{% endblock %}
+
+
+{% block console %}
+<ul class="am-nav am-nav-tabs">
+    <li><a href="{{ url_for('admin.control')}}">邀请码信息</a></li>
+    <li class="am-active"><a href="{{ url_for('admin.user_msg') }}">用户信息</a></li>
+    <li><a href="{{ url_for('admin.challenge_msg') }}">题目信息</a></li>
+    <li><a href="#">更多...</a></li>
+</ul>
+
+<div class="am-scrollable-vertical">
+    <table class="am-table am-table-hover">
+        <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名字</th>
+                <th>创建时间</th>
+                <th>用户角色</th>
+                <th>解题总分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if user_msgs %}
+            {% for user_msg in user_msgs %}
+            {% for role_msg in role_msgs %}
+            {% if user_msg.role_id == role_msg.id %}
+            <tr>
+                <td>{{ user_msg.id }}</td>
+                <td>{{ user_msg.username }}</td>
+                <td>{{ user_msg.create_time}}</td>
+                <td>{{ role_msg.name }}</td>
+                {% if user_msg.score %}
+                <td>user_msg.score&nbsp;分</td>
+                {% else %}
+                <td>0&nbsp;分</td>
+                {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/control.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Control{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/control.css')}}">{% endblock %}
+
+
+{% block main %}
+<!--控制台-->
+<div class="am-container" style="height:600px;margin-top:100px;">
+    <div class="am-g">
+        <div class="am-u-sm-3 left">
+            <ul class="am-nav am-fr left_nav">
+                <li {% block ac_nav_1 %}{% endblock %}><a href="{{ url_for('admin.control') }}">基本信息</a></li>
+                <li {% block ac_nav_2 %}{% endblock %}><a href="{{ url_for('admin.announce') }}">发布公告</a></li>
+                <li {% block ac_nav_3 %}{% endblock %}><a>修改密码</a></li>
+            </ul>
+        </div>
+        <div class="am-u-sm-9 right">
+            {% block console %}
+            {% endblock %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

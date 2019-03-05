@@ -1,0 +1,47 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block main %}
+<!--注册框-->
+<div class="am-container ">
+    <div class="am-g">
+        <div class="am-u-sm-6 am-u-lg-centered">
+            <form action="" class="am-form" id="form-with-tooltip" method="post">
+                <fieldset>
+                    <legend class="am-text-center am-text-secondary">安装</legend>
+                    <div class="am-form-group">
+                        <label for="username" class="am-text-secondary"><span class="am-text-success">(*可选)&nbsp;&nbsp;</span>取个名字呗：</label>
+                        <input type="text" id="username" value="admin" name='username' placeholder="至少地球人能看懂,(默认为admin)" data-foolish-msg="外星人，你被逮捕了!" />
+                    </div>
+                    <div class="am-form-group">
+                        <label for="email" class="am-text-secondary"><span class="am-text-danger">(*必填)&nbsp;&nbsp;</span>你的邮箱：</label>
+                        <input type="text" id="email" name="email" placeholder="没有就快去注册一个喂" required email data-foolish-msg="输入地球上的电子邮箱撒!" />
+                    </div>
+
+                    <div class="am-form-group">
+                        <label for="password-1" class="am-text-secondary"><span class="am-text-success">(*可选)&nbsp;&nbsp;</span>密码：</label>
+                        <input type="password" id="password-1" value="admin" name="password" placeholder="自己也需要有点安全意识嘛,(默认为admin)"
+                            data-foolish-msg="这样输入是不对滴,别问我怎么输，自己猜" />
+                    </div>
+                    <div class="am-form-group">
+                        <label for="password-2" class="am-text-secondary"><span class="am-text-success">(*可选)&nbsp;&nbsp;</span>确认密码：</label>
+                        <input type="password" id="password-2" value="admin" placeholder="这次是为了让你记住,别动不动就忘记密码,(默认为admin)" data-equal-to='#password-1'
+                            data-foolish-msg="你搞什么幺蛾子哦" />
+                    </div>
+                    <input type="submit" name="" value="立即安装 \(‵▽′)/ ! " class="am-btn am-btn-secondary am-btn-sm am-fr">
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/setup.js') }}"></script>
+{% endblock %}

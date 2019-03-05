@@ -1,0 +1,100 @@
+{% extends 'admin/base.html' %}
+
+
+{% block ac_nav_1 %}class="am-active"{% endblock %}
+
+
+{% block console %}
+<ul class="am-nav am-nav-tabs">
+    <li class="am-active"><a href="{{ url_for('admin.control')}}">邀请码信息</a></li>
+    <li><a href="{{ url_for('admin.user_msg') }}">用户信息</a></li>
+    <li><a href="{{ url_for('admin.challenge_msg') }}">题目信息</a></li>
+    <li><a href="#">更多...</a></li>
+</ul>
+<div class="am-scrollable-vertical">
+    <table class="am-table am-table-hover">
+        <thead>
+            <tr>
+                <th>邀请码ID</th>
+                <th>激活状态</th>
+                <th>创建时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if invitecodes %}
+            {% for invitecode in invitecodes %}
+            {% if invitecode.user_id %}
+            <tr class="am-success">
+                <td>{{ invitecode.id }}</td>
+                <td>已激活<br />
+                    激活用户ID: {{ invitecode.user_id }}
+                </td>
+                <td>{{ invitecode.create_time}}</td>
+            </tr>
+            {% else%}
+            <tr class="am-danger">
+                <td>{{ invitecode.id }}</td>
+                <td>未激活</td>
+                <td>{{ invitecode.create_time}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+        </tbody>
+        <button type="button" class="am-btn am-btn-success am-fl" id="query-invitecode">查询邀请码</button>
+        <a href="{{ url_for('admin.create_invitecode') }}" type="button" class="am-btn am-btn-warning am-fr" id="create-invitecode">生成邀请码</a>
+
+        <!--模态窗口-1 -->
+        <div class="am-modal am-modal-prompt" tabindex="-1" id="query-prompt">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd am-text-warning">查询邀请码</div>
+                <div class="am-modal-bd">
+                    请输入邀请码ID
+                    <input type="text" class="am-modal-prompt-input" id="input-invitecode" placeholder="邀请码ID:">
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">取消</span>
+                    <span class="am-modal-btn" data-am-modal-confirm>查询</span>
+                </div>
+            </div>
+        </div>
+        <!--模态窗口-2 -->
+        <!-- 判断是否存在，存在则显示--- -->
+        <div class="am-modal am-modal-alert" tabindex="-2" id="query-result">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd am-text-warning">查询结果</div>
+                <div class="am-scrollable-horizontal">
+                    <div class="am-modal-bd" id='query-result-text'>
+
+                    </div>
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">确定</span>
+                </div>
+            </div>
+        </div>
+        <!--模态窗口-3 -->
+        <div class="am-modal am-modal-alert" tabindex="-1" id="confirm-create">
+            <div class="am-modal-dialog">
+                <div class="am-modal-hd am-text-warning">确认生成邀请码</div>
+                <div class="am-scrollable-horizontal">
+                    <div class="am-modal-bd">
+                        是否生成邀请码？
+                    </div>
+                </div>
+                <div class="am-modal-footer">
+                    <span class="am-modal-btn">取消</span>
+                    <a href="{{ url_for('admin.create_invitecode') }}" class="am-modal-btn">确定</a>
+                </div>
+            </div>
+        </div>
+    </table>
+
+</div>
+{% endblock %}
+
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/control.js') }}"></script>
+{% endblock %}

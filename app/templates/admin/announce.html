@@ -1,0 +1,27 @@
+{% extends 'admin/base.html' %}
+
+{% block ac_nav_2 %}class="am-active"{% endblock %}
+
+
+{% block console %}
+<form class="am-form" action="" method="POST">
+    <fieldset>
+        <legend class="am-text-center am-text-secondary">发布公告</legend>
+
+        <div class="am-form-group">
+            <label for="title" class="am-text-secondary"><span class="am-text-success">(*可选)&nbsp;&nbsp;</span>公告标题</label>
+            <input type="text" name='title' class="am-text-center" placeholder="输入公告标题：(默认为最新公告)">
+        </div>
+
+        <div class="am-form-group">
+            <label for="body" class="am-text-secondary"><span class="am-text-danger">(*必填)&nbsp;&nbsp;</span>公告内容</label>
+            <textarea name='body' placeholder="在此区域输入公告内容..." class="" rows="8" required ></textarea>
+        </div>
+        <input type="submit" name="" value="立即提交 *^ο^* ! "class="am-btn am-btn-success am-btn-sm am-fr">
+</form>
+{% endblock %}
+
+
+{% block script %}
+<!-- <script src="{{ url_for('static', filename='js/') }}"></script> -->
+{% endblock %}

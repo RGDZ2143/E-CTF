@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock %} E-CTF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <!--听说是防狼术-->
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/amazeui.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css')}}">
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <!--导航条-->
+    <div class="nav">
+        <header class="am-topbar am-topbar-inverse am-container">
+            <h1 class="am-topbar-brand">
+                <a href="{{ url_for('user.index') }}"><span class="am-icon-eye am-icon-md">&nbspE-CTF</a>
+            </h1>
+
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li class="{% block ac_index %}{% endblock %}"><a href="{{ url_for('user.index') }}"><span class="am-icon-coffee am-icon-sm">&nbsp公告</span></a></li>
+                    <li class="{% block ac_community %}{% endblock %}"><a href="#"><span class='am-icon-users am-icon-sm'>&nbsp社区</span></a></li>
+                    <li class="{% block ac_challenge %}{% endblock %}"><a href="{{ url_for('user.challenges_page') }}"><span class='am-icon-flag-checkered am-icon-sm am-danger'
+                                style="color:rgba(255, 94, 0, 0.918)">&nbsp挑战</span></a></li>
+                </ul>
+                {% if user_msg %}
+                <div class="am-topbar-right">
+                    <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+                        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
+                            data-am-dropdown-toggle>其他 <span class="am-icon-caret-down"></span></button>
+                        <ul class="am-dropdown-content">
+                            <li><a href="#">排名</a></li>
+                            <li><a href="{{ url_for('user.poweroff') }}">注销</a></li>
+                            <li><a href="#">关于</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="am-topbar-right">
+                    <!--TODO: 用户个人界面-->
+                    <a href="{{ url_for('user.control') }}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm">{{ user_msg.username}}</a>
+                </div>
+                {% else %}
+                <div class="am-topbar-right">
+                    <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+                        <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
+                            data-am-dropdown-toggle>其他 <span class="am-icon-caret-down"></span></button>
+                        <ul class="am-dropdown-content">
+                            <li><a href="{{ url_for('user.register') }}">注册</a></li>
+                            <li><a href="#">关于</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="am-topbar-right">
+                    <a href="{{ url_for('user.login') }}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</a>
+                </div>
+                {% endif %}
+            </div>
+        </header>
+    </div>
+    {% block main %}
+    {% endblock %}
+    <!--页脚-->
+    <footer data-am-widget="footer" class="am-footer am-footer-default footer" data-am-footer="{  }">
+        <div class="am-footer-switch">
+            <span class="am-footer-ysp" data-rel="mobile" data-am-modal="{target: '#am-switch-mode'}">
+                E-CTF
+            </span>
+            <span class="am-footer-divider"> | </span>
+            <a id="godesktop" data-rel="desktop" class="am-footer-desktop" href="javascript:">
+                GZU
+            </a>
+        </div>
+        <div class="am-footer-miscs ">
+
+            <p>前端布局框架来自于 <a href="http://amazeui.org" title="amazeui" target="_blank" class="">妹子UI</a></p>
+            <p>没有人提供技术支持</p>
+            <p>©2019</p>
+            <p>未备案</p>
+        </div>
+    </footer>
+
+    <div id="am-footer-modal" class="am-modal am-modal-no-btn am-switch-mode-m am-switch-mode-m-default">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd am-modal-footer-hd">
+                <a href="javascript:void(0)" data-dismiss="modal" class="am-close am-close-spin " data-am-modal-close>&times;</a>
+            </div>
+            <div class="am-modal-bd">
+                联系管理员：<br>
+
+                <span class="am-switch-mode-owner">
+                    E-Mail: rgdz.gzu@qq.com <br>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--回顶部-->
+    <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+        <a href="#top" title="回到顶部" class="am-icon-btn am-icon-arrow-up am-active" id="amz-go-top"></a>
+    </div>
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static',filename='assets/js/amazeui.min.js') }}"></script>
+    {% block script %}{% endblock %}
+</body>
+
+</html>

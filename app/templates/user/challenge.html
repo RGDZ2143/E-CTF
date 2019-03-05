@@ -1,0 +1,58 @@
+{% extends 'user/base.html' %}
+
+{% block title %}Challenge{% endblock %}
+
+{% block head %}
+<style>
+    .all-g{
+        margin-bottom: 20px;
+    }
+    .challenge-band{
+        margin-top: 100px;
+    }
+</style>
+{% endblock %}
+
+
+{% block main %}
+<!--挑战-->
+<div class="am-container challenge-band">
+    <div class="am-panel-group" id="challengs"></div>
+        <!-- 利用模板变量来跟新数据 -->
+        <ul class="am-avg-sm-3 am-thumbnails ">
+            {% for challenge in challenges %}
+            <li>
+                <section class="am-panel am-panel-secondary">
+                    <header class="am-panel-hd">
+                        <h3 class="am-panel-title am-text-center" data-am-collapse="{parent:'#challengs',target: '#{{ challenge.id }}'}">
+                            {{ challenge.name }}<br />
+                            分数：{{ challenge.score }}
+                        </h3>
+                    </header>
+                    <div class="am-collapse am-panel-collapse" id="{{ challenge.id }}">
+                        <div class="am-panel-bd am-text-break">
+                            nc&nbsp;<span class="am-text-warning">{{ challenge.address }}</span><br />
+                            <a href="#">{{ challenge.name }}</a>
+                        </div>
+                        <footer class="am-panel-footer">
+                            <form class="am-form">
+                                <div class="am-form-group">
+                                    <input type="email" class="" id="doc-ipt-email-1" placeholder="不服就提交FLAG:">
+                                </div>
+                            </form>
+                        </footer>
+                    </div>
+                </section>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'admin/base.html' %}
+
+
+{% block ac_nav_1 %}class="am-active"{% endblock %}
+
+
+{% block console %}
+<ul class="am-nav am-nav-tabs">
+    <li class="am-active"><a href="{{ url_for('admin.control')}}">邀请码信息</a></li>
+    <li><a href="{{ url_for('admin.user_msg') }}">用户信息</a></li>
+    <li><a href="{{ url_for('admin.challenge_msg') }}">题目信息</a></li>
+    <li><a href="#">更多...</a></li>
+</ul>
+<div class="am-scrollable-vertical">
+    <table class="am-table am-table-hover">
+        <thead>
+            <tr>
+                <th>题目ID</th>
+                <th>题目名字</th>
+                <th>题目分值</th>
+                <th>创建时间</th>
+                <th>攻破人数</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for challenge_msg in challenges_msg %}
+            <tr>
+                <td>{{ challenge_msg.id }}</td>
+                <td>{{ challenge_msg.name}}</td>
+                <td>
+                    {% if challenge_msg.score %}
+                    {{ challenge_msg.score }}&nbsp;分
+                    {% else %}
+                    0&nbsp;分
+                    {% endif %}
+                </td>
+                <td>{{ challenge_msg.create_time}}</td>
+                <td>{{ su_chall_user_num[challenge_msg.id] }}&nbsp;人</td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<a href="{{ url_for('admin.update_challenges') }}" type="button" class="am-btn am-btn-success am-fl" id="create-invitecode">
+    更新题目数据</a>
+<form class="amm-form" method="POST" enctype='multipart/form-data' action="">
+    <fieldset>
+        <div class="am-form-group am-form-file">
+            <button type="button" class="am-btn am-btn-danger am-btn-sm am-fr">
+                <i class="am-icon-cloud-upload"></i> 上传的题目文件</button>
+            <input id="doc-form-file" name='file' type="file" multiple>
+        </div>
+        <div id="file-list" class="am-fr"></div>
+        <p><button type="submit" class="am-btn am-btn-default am-fr">提交</button></p>
+    </fieldset>
+</form>
+{% endblock %}
+
+
+{% block script %}
+<script src="{{ url_for('static', filename='js/challenge_msg.js') }}"></script>
+{% endblock %}
